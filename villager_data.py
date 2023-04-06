@@ -1,4 +1,4 @@
-from collection import defauldict
+from collections import defaultdict
 """Functions to parse a file containing villager data."""
 
 
@@ -58,12 +58,12 @@ def all_names_by_hobby(filename):
     Return:
         - list[list[str]]: a list of lists containing names
     """
-    hobbies = defauldict(list)
+    hobbies = defaultdict(list)
     file = open(filename)
     order = ['Fitness', 'Nature', 'Education', 'Music', 'Fashion', 'Play']
     for line in file:
         words = line.strip().split("|")
-        hobbies[words[-2]] = words[0]
+        hobbies[words[-2]].append(words[0])
     return [sorted(hobbies[hobby]) for hobby in order]
 
 
@@ -144,4 +144,13 @@ def find_likeminded_villagers(filename, villager_name):
         words = line.strip().split("|")
         if personality in words and villager_name not in words:
             personality_set.add(words[0])
+    return personality_set
 
+file = 'villagers.csv'
+print(all_data(file))
+print(find_motto(file, 'Annalisa'))
+print(find_likeminded_villagers(file, 'Pango'))
+print(all_names_by_hobby(file))
+print(get_villagers_by_species(file))
+print(get_villagers_by_species(file, 'Fashion'))
+print(all_species(file))
