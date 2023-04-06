@@ -17,7 +17,7 @@ def all_species(filename):
     file = open(filename)
     
     for line in file:
-        words = line.split("|")
+        words = line.strip().split("|")
         species.add(words[1])
 
     return species
@@ -39,7 +39,7 @@ def get_villagers_by_species(filename, search_string="All"):
 
     file = open(filename)
     for line in file:
-        words = line.split("|")
+        words = line.strip().split("|")
         if search_string.lower() == 'all':
           villagers.append(words[0])
         elif search_string == words[1]:
@@ -62,7 +62,7 @@ def all_names_by_hobby(filename):
     file = open(filename)
     order = ['Fitness', 'Nature', 'Education', 'Music', 'Fashion', 'Play']
     for line in file:
-        words = line.split("|")
+        words = line.strip().split("|")
         hobbies[words[-2]] = words[0]
     return [sorted(hobbies[hobby]) for hobby in order]
 
@@ -80,10 +80,12 @@ def all_data(filename):
         - list[tuple[str]]: a list of tuples containing strings
     """
     
-    for 
+    file = open(filename)
     all_data = []
 
-    # TODO: replace this with your code
+    for line in file:
+        words = line.strip().split("|")
+        all_data.append(tuple(words)) 
 
     return all_data
 
@@ -104,7 +106,7 @@ def find_motto(filename, villager_name):
     file = open(filename)
     
     for line in file:
-        words = line.split("|")
+        words = line.strip().split("|")
         if words[0] == villager_name:
           return words[-1]
     return None
@@ -125,4 +127,21 @@ def find_likeminded_villagers(filename, villager_name):
         {'Bella', ..., 'Carmen'}
     """
 
-    # TODO: replace this with your code
+    file = open(filename)
+    personality = ''
+    personality_set = set()
+
+    # find personailty of villager:
+    #   for loop name return personality variable that matches the villager name
+    for line in file:
+        words = line.strip().split("|")
+        if villager_name in words:
+            personality = words[2]
+            break
+    # find all lines that match personality:
+    #   for loop  set.add names who match personality and are not the villager
+    for line in file:
+        words = line.strip().split("|")
+        if personality in words and villager_name not in words:
+            personality_set.add(words[0])
+
