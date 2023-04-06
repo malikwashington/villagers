@@ -146,11 +146,11 @@ def find_likeminded_villagers(filename, villager_name):
             personality_set.add(words[0])
     return personality_set
 
-file = 'villagers.csv'
-print(all_data(file))
-print(find_motto(file, 'Annalisa'))
-print(find_likeminded_villagers(file, 'Pango'))
-print(all_names_by_hobby(file))
-print(get_villagers_by_species(file))
-print(get_villagers_by_species(file, 'Fashion'))
-print(all_species(file))
+FILE = 'villagers.csv'
+print(all_data(FILE))
+print(find_motto(FILE, 'Annalisa'))
+print(find_likeminded_villagers(FILE, 'Pango'))
+print(all_names_by_hobby(FILE))
+print(get_villagers_by_species(FILE))
+print(get_villagers_by_species(FILE, 'Fashion'))
+print(all_species(FILE))
